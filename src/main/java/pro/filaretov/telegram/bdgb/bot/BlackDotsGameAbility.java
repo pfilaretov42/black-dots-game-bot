@@ -11,7 +11,7 @@ import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
 import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.Reply;
-import pro.filaretov.telegram.bdgb.consumer.GameAction;
+import pro.filaretov.telegram.bdgb.consumer.AliensGoHomeGameAction;
 
 /**
  * Black Dots Game Ability
@@ -26,8 +26,6 @@ public class BlackDotsGameAbility extends AbilityBot {
 
     @Value("${BLACK_DOTS_GAME_BOT_CREATOR_ID}")
     private int creatorId;
-    @Value("${BLACK_DOTS_GAME_BOT_BASE_URL}")
-    private String baseUrl;
 
     public BlackDotsGameAbility(@Value("${BLACK_DOTS_GAME_BOT_TOKEN}") String token) {
         super(token, BOT_USER_NAME);
@@ -39,6 +37,22 @@ public class BlackDotsGameAbility extends AbilityBot {
     }
 
     // TODO - manage standard ability commands like /commands, /report, etc
+
+    /**
+     * "Aliens, Go Home!" game callback
+     */
+    public Reply aliensGoHomeCallback() {
+        // TODO - we cannot inject AliensGoHomeGameAction as a bean since this method is called from super constructor.
+        //  Create my own BaseAbilityBot for a proper bean injection to work?
+        String aghBaseUrl = System.getenv("BLACK_DOTS_GAME_BOT_BASE_URL");
+        AliensGoHomeGameAction action = new AliensGoHomeGameAction(sender, aghBaseUrl);
+        return Reply.of(action, update ->
+            Flag.CALLBACK_QUERY.test(update)
+                && update.getCallbackQuery().getGameShortName() != null
+                && !update.getCallbackQuery().getGameShortName().isEmpty()
+                && update.getCallbackQuery().getGameShortName().equals(AliensGoHomeGameAction.SHORT_NAME)
+        );
+    }
 
     /**
      * Prints usage information on /start command
@@ -53,18 +67,6 @@ public class BlackDotsGameAbility extends AbilityBot {
             .privacy(PUBLIC)
             .action(ctx -> silent.send(USAGE_MESSAGE, ctx.chatId()))
             .build();
-    }
-
-    /**
-     * A game callback
-     */
-    public Reply gameCallback() {
-        GameAction action = new GameAction(silent, sender, baseUrl);
-        return Reply.of(action, update ->
-            Flag.CALLBACK_QUERY.test(update)
-                && update.getCallbackQuery().getGameShortName() != null
-                && !update.getCallbackQuery().getGameShortName().isEmpty()
-        );
     }
 
 }
