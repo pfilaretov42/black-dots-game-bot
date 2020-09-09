@@ -78,8 +78,8 @@
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.9.1</version>
 				<configuration>
-					<nodeVersion>v12.8.2</nodeVersion>
-					<npmVersion>6.14.5</npmVersion>
+					<nodeVersion>v12.18.3</nodeVersion>
+					<npmVersion>6.14.6</npmVersion>
 					<workingDirectory>src/main/webapp/WEB-INF/view/react</workingDirectory>
 				</configuration>
 				<executions>
