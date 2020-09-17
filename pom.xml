@@ -11,7 +11,7 @@
 	<groupId>pro.filaretov</groupId>
 	<artifactId>black-dots-game-bot</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>black-dots-game-bot</name>
 	<description>BlackDots Game Bot for Telegram</description>
 
@@ -19,6 +19,7 @@
 		<!-- TODO - update to Java 14 -->
 		<java.version>1.8</java.version>
 		<telegram.api.version>4.9.1</telegram.api.version>
+		<frontend.home>react</frontend.home>
 	</properties>
 
 	<repositories>
@@ -80,7 +81,7 @@
 				<configuration>
 					<nodeVersion>v12.18.3</nodeVersion>
 					<npmVersion>6.14.6</npmVersion>
-					<workingDirectory>src/main/webapp/WEB-INF/view/react</workingDirectory>
+					<workingDirectory>${frontend.home}</workingDirectory>
 				</configuration>
 				<executions>
 					<execution>
@@ -103,6 +104,24 @@
 						<configuration>
 							<arguments>run build</arguments>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<configuration>
+							<target>
+								<copy todir="${project.build.directory}/classes/public">
+									<fileset dir="${project.basedir}/${frontend.home}/build"/>
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>

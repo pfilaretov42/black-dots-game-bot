@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import App from '../App';
 import {
   moveObjects, startGame, shoot
-} from '../actions/index';
+} from '../actions';
 
 const mapStateToProps = state => ({
   angle: state.angle,
