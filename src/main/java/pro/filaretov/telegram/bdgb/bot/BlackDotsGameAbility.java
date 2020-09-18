@@ -11,6 +11,7 @@ import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
 import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.Reply;
+import org.telegram.abilitybots.api.sender.MessageSender;
 import pro.filaretov.telegram.bdgb.consumer.AliensGoHomeGameAction;
 
 /**
@@ -24,6 +25,8 @@ public class BlackDotsGameAbility extends AbilityBot {
     // TODO - update
     public static final String USAGE_MESSAGE = "Play my games";
 
+    // TODO - reply with game to inline query
+
     @Value("${BLACK_DOTS_GAME_BOT_CREATOR_ID}")
     private int creatorId;
 
@@ -34,6 +37,10 @@ public class BlackDotsGameAbility extends AbilityBot {
     @Override
     public int creatorId() {
         return creatorId;
+    }
+
+    MessageSender getSender() {
+        return sender;
     }
 
     // TODO - manage standard ability commands like /commands, /report, etc

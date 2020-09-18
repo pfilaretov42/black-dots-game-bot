@@ -18,7 +18,12 @@ This Telegram bot provides some simple games with notes. These small black dots,
 * set `BLACK_DOTS_GAME_BOT_KEYSTORE` environment variable to the PKCS12 keystore path.
 * set `BLACK_DOTS_GAME_BOT_KEYSTORE_PASSWORD` environment variable to the keystore password.
 * set `BLACK_DOTS_GAME_BOT_KEY_ALIAS` to the key alias.
-* run spring boot application:
+* build:
   ```
-  ./mvnw spring-boot:run
+  mvn clean package
+  ```
+  Output is in the `target` folder.
+* run:
+  ```
+  java -jar black-dots-game-bot-1.0.0-SNAPSHOT.war
   ```

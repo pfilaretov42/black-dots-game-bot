@@ -25,6 +25,25 @@ class App extends Component {
     window.onresize();
   }
 
+  componentDidUpdate(prevProps) {
+    if (!this.props.gameState.started && prevProps.gameState.started) {
+      fetch('/api/v1/agh/score', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          // TODO - get userId and chatId from state
+          userId: 123,
+          chatId: '456',
+          score: this.props.gameState.kills
+        })
+      });
+
+    }
+  }
+
   trackMouse(event) {
     this.canvasMousePosition = getCanvasPosition(event);
   }
@@ -53,6 +72,7 @@ App.propTypes = {
     kills: PropTypes.number.isRequired,
     lives: PropTypes.number.isRequired,
   }).isRequired,
+  // TODO - Browser gives a Warning: Failed prop type: The prop `flyingObjects` is marked as required in `App`, but its value is `undefined`.
   flyingObjects: PropTypes.arrayOf(PropTypes.shape({
     position: PropTypes.shape({
       x: PropTypes.number.isRequired,
