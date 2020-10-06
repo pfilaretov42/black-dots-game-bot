@@ -7,7 +7,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.shoot = this.shoot.bind(this);
-    this.socket = null;
   }
 
   componentDidMount() {
@@ -27,6 +26,10 @@ class App extends Component {
 
   componentDidUpdate(prevProps) {
     if (!this.props.gameState.started && prevProps.gameState.started) {
+      const searchParams = new URLSearchParams(window.location.search);
+      const userId = searchParams.get("user");
+      const imId = searchParams.get("imid");
+
       fetch('/api/v1/agh/score', {
         method: 'POST',
         headers: {
@@ -34,9 +37,8 @@ class App extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          // TODO - get userId and chatId from state
-          userId: 123,
-          chatId: '456',
+          userId: userId,
+          imId: imId,
           score: this.props.gameState.kills
         })
       });

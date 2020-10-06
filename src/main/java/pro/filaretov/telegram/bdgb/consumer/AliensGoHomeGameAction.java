@@ -37,9 +37,8 @@ public class AliensGoHomeGameAction implements Consumer<Update> {
 
         AnswerCallbackQuery answer = new AnswerCallbackQuery();
         answer.setCallbackQueryId(callbackQuery.getId());
-        answer.setUrl(baseUrl);
-
-        //SetGameScore setGameScore = new SetGameScore();
+        // TODO - need to encrypt/encode it?
+        answer.setUrl(baseUrl + String.format("?user=%s&imid=%s", from.getId(), callbackQuery.getInlineMessageId()));
 
         try {
             sender.execute(answer);

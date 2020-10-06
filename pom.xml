@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pro.filaretov</groupId>
 	<artifactId>black-dots-game-bot</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>black-dots-game-bot</name>
 	<description>BlackDots Game Bot for Telegram</description>

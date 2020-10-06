@@ -24,6 +24,11 @@ This Telegram bot provides some simple games with notes. These small black dots,
   ```
   Output is in the `target` folder.
 * run:
-  ```
-  java -jar black-dots-game-bot-1.0.0-SNAPSHOT.war
-  ```
+  * locally for development:
+    ```
+    java -jar -Dspring.profiles.active=local black-dots-game-bot-1.0.0.war
+    ```
+  * on prod env:
+    ```
+    java -jar black-dots-game-bot-1.0.0.war
+    ```

@@ -22,10 +22,10 @@ public class ScoreManager {
         sender = ability.getSender();
     }
 
-    public void setScore(Integer userId, String chatId, Integer score) {
+    public void setScore(Integer userId, String imId, Integer score) {
         SetGameScore gameScore = new SetGameScore();
         gameScore.setUserId(userId);
-        gameScore.setChatId(chatId);
+        gameScore.setInlineMessageId(imId);
         gameScore.setScore(score);
 
         try {

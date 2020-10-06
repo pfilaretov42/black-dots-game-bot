@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class ScoreDto {
 
     private Integer userId;
-    private String chatId;
+    private String imId;
     private Integer score;
 }

@@ -24,9 +24,9 @@ public class AliensGoHomeController {
         // TODO - check whether the request is allowed or not, so that cheating is not possible
 
         Integer userId = scoreDto.getUserId();
-        String chatId = scoreDto.getChatId();
+        String imId = scoreDto.getImId();
         Integer score = scoreDto.getScore();
-        scoreManager.setScore(userId, chatId, score);
+        scoreManager.setScore(userId, imId, score);
     }
 
 }
