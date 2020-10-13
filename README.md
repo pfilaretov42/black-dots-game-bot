@@ -26,8 +26,9 @@ This Telegram bot provides some simple games with notes. These small black dots,
 * run:
   * locally for development:
     ```
-    java -jar -Dspring.profiles.active=local black-dots-game-bot-1.0.0.war
+    java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar -Dspring.profiles.active=local black-dots-game-bot-1.0.0.war
     ```
+    Open browser at https://localhost:7443/index.html
   * on prod env:
     ```
     java -jar black-dots-game-bot-1.0.0.war
