@@ -18,7 +18,7 @@ const Canvas = (props) => {
   const lives = [];
   for (let i = 0; i < props.gameState.lives; i++) {
     const heartPosition = {
-      x: -180 - (i * 70),
+      x: -120 - (i * 70),
       y: 35
     };
     lives.push(<Heart key={i} position={heartPosition}/>);

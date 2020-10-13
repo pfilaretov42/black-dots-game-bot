@@ -31,5 +31,5 @@ This Telegram bot provides some simple games with notes. These small black dots,
     Open browser at https://localhost:7443/index.html
   * on prod env:
     ```
-    java -jar black-dots-game-bot-1.0.0.war
+    java -jar -Dspring.profiles.active=prod black-dots-game-bot-1.0.0.war
     ```

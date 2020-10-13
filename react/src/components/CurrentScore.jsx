@@ -10,7 +10,7 @@ const CurrentScore = (props) => {
 
   return (
     <g filter="url(#shadow)">
-      <text style={scoreStyle} x="300" y="80">
+      <text style={scoreStyle} x="80" y="80">
         {props.score}
       </text>
     </g>

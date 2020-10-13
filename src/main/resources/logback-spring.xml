@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+  <property name="LOG_FILE" value="logs/black-dots-game-bot.log"/>
+  <property name="LOG_FILE_NAME_PATTERN"
+    value="logs/archived/black-dots-game-bot.%d{yyyy-MM-dd}.%i.log.zip"/>
+  <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+  <springProfile name="local | dev">
+    <logger name="org.springframework" level="DEBUG" additivity="false">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+    <root level="DEBUG">
+      <appender-ref ref="CONSOLE"/>
+    </root>
+    <logger name="org.apache.http" level="INFO"/>
+  </springProfile>
+
+  <springProfile name="prod">
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <encoder>
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+      </encoder>
+      <file>${LOG_FILE}</file>
+      <rollingPolicy
+        class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <!-- daily rollover -->
+        <fileNamePattern>${LOG_FILE_NAME_PATTERN}</fileNamePattern>
+        <!-- size rollover -->
+        <maxFileSize>100MB</maxFileSize>
+      </rollingPolicy>
+    </appender>
+    <root level="INFO">
+      <appender-ref ref="FILE"/>
+    </root>
+  </springProfile>
+
+  <springProfile name="prod-debug">
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <encoder>
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+      </encoder>
+      <file>${LOG_FILE}</file>
+      <rollingPolicy
+        class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <!-- daily rollover -->
+        <fileNamePattern>${LOG_FILE_NAME_PATTERN}</fileNamePattern>
+        <!-- size rollover -->
+        <maxFileSize>100MB</maxFileSize>
+      </rollingPolicy>
+    </appender>
+    <root level="DEBUG">
+      <appender-ref ref="FILE"/>
+    </root>
+    <logger name="org.apache.http" level="INFO"/>
+  </springProfile>
+
+  <springProfile name="debug">
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <encoder>
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+      </encoder>
+      <file>${LOG_FILE}</file>
+      <rollingPolicy
+        class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <!-- daily rollover -->
+        <fileNamePattern>${LOG_FILE_NAME_PATTERN}</fileNamePattern>
+        <!-- size rollover -->
+        <maxFileSize>100MB</maxFileSize>
+      </rollingPolicy>
+    </appender>
+    <root level="DEBUG">
+      <appender-ref ref="FILE"/>
+    </root>
+  </springProfile>
+
+  <springProfile name="default">
+    <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
+    </root>
+  </springProfile>
+
+</configuration>
