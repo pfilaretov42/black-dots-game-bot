@@ -13,6 +13,7 @@ import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.Reply;
 import org.telegram.abilitybots.api.sender.MessageSender;
 import pro.filaretov.telegram.bdgb.consumer.AliensGoHomeGameAction;
+import pro.filaretov.telegram.bdgb.consumer.InlineQueryAction;
 
 /**
  * Black Dots Game Ability
@@ -59,6 +60,15 @@ public class BlackDotsGameAbility extends AbilityBot {
                 && !update.getCallbackQuery().getGameShortName().isEmpty()
                 && update.getCallbackQuery().getGameShortName().equals(AliensGoHomeGameAction.SHORT_NAME)
         );
+    }
+
+    /**
+     * Register action to answer inline queries
+     */
+    public Reply answerInlineQuery() {
+        // TODO - we cannot inject InlineQueryAction as a bean since this method is called from super constructor.
+        InlineQueryAction action = new InlineQueryAction(sender);
+        return Reply.of(action, Flag.INLINE_QUERY);
     }
 
     /**

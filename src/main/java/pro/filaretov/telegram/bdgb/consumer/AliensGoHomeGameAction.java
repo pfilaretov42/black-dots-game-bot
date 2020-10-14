@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
 /**
  * Action representing the game
@@ -42,6 +43,9 @@ public class AliensGoHomeGameAction implements Consumer<Update> {
 
         try {
             sender.execute(answer);
+        } catch (TelegramApiRequestException e) {
+            LOG.error("Cannot send answer callback. Error code: {}, API response: {}",
+                e.getErrorCode(), e.getApiResponse());
         } catch (TelegramApiException e) {
             LOG.error("Cannot send answer callback", e);
         }
