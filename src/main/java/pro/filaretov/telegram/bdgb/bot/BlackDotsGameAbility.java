@@ -3,8 +3,6 @@ package pro.filaretov.telegram.bdgb.bot;
 import static org.telegram.abilitybots.api.objects.Locality.ALL;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.abilitybots.api.bot.AbilityBot;
@@ -21,12 +19,10 @@ import pro.filaretov.telegram.bdgb.consumer.InlineQueryAction;
 @Component
 public class BlackDotsGameAbility extends AbilityBot {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BlackDotsGameAbility.class);
     private static final String BOT_USER_NAME = "BlackDotsBot";
-    // TODO - update
-    public static final String USAGE_MESSAGE = "Play my games";
-
-    // TODO - reply with game to inline query
+    private static final String USAGE_MESSAGE = "This bot can get you some fun games to play. "
+        + "Simply open any of your chats, type '@BlackDotsGameBot ' in the message field and choose a game. "
+        + "For example, try typing it here.";
 
     @Value("${BLACK_DOTS_GAME_BOT_CREATOR_ID}")
     private int creatorId;
