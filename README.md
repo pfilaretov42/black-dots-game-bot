@@ -33,3 +33,25 @@ This Telegram bot provides some simple games with notes. These small black dots,
     ```
     sudo java -jar -Dspring.profiles.active=prod black-dots-game-bot-1.0.0.war &
     ```
+
+## How to renew Let's Encrypt certificate
+**TODO - automate (using certbot-renew.timer?)**
+
+* get new certificate 
+  ```
+  sudo systemctl start certbot-renew
+  ```
+* stop application (kill java process)
+* login as root (or use full paths for files) and update PKCS12 keystore:
+  ```
+  openssl pkcs12 -export -in fullchain.pem \
+                 -inkey privkey.pem \
+                 -out keystore.p12 \
+                 -name <BLACK_DOTS_GAME_BOT_KEY_ALIAS> \
+                 -CAfile chain.pem \
+                 -caname root
+  ```
+* start application
+  ```
+  sudo java -jar -Dspring.profiles.active=prod black-dots-game-bot-1.0.0.war &
+  ```
